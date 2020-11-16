@@ -79,7 +79,7 @@ def Arg(contents, comments=None):
     return _Arg(contents, comments or [])
 
 
-def Command(name, body, comment=None):
+def Command(name, body, comment=[]):
     return _Command(name, body, comment)
 
 
@@ -183,7 +183,12 @@ def command_to_lines(cmd, formatting_opts, use_multiple_lines=False):
     output.current_line += ')'
 
     if cmd.comment:
-        output.current_line += ' ' + cmd.comment
+        if isinstance(cmd.comment, str):
+            output.current_line += ' ' + cmd.comment
+        elif isinstance(cmd.comment, list):
+            for line in cmd.comment:
+                output.current_line += line
+                end_current_line()
 
     end_current_line()
 
