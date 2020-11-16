@@ -233,7 +233,7 @@ def attach_comment_to_command(lnums_command, lnums_comment):
 
 
 def parse_command(start_line_num, command_name, toks):
-    cmd = Command(name=command_name, body=[], comment=None)
+    cmd = Command(name=command_name, body=[], comment=[])
     expect('left paren', toks)
     for line_num, (typ, tok_contents) in toks:
         if typ == 'right paren':
